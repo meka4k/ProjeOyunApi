@@ -12,15 +12,14 @@ namespace ProjeOyun.Domain.Entities
         public DateTime SaleDate { get; set; }
         public decimal Price { get; set; }
 
-        public int PlayerId { get; set; }
-        public Player Player { get; set; }
+		public int PlayerId { get; set; }
+		public Player Player { get; set; }
+
+		public int GameId { get; set; }
+		public Game Game { get; set; }
 
 
-        public int GameId { get; set; }
-        public Game Game { get; set; }
-
-
-        public int? CampaignId { get; set; }
-        public Campaign Campaign { get; set; }
-    }
+		public int? CampaignId { get; set; }
+		public Campaign Campaign { get; set; }
+	}
 }

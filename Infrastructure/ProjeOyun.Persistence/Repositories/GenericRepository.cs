@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using ProjeOyun.Application.Interfaces.Repositories;
 using ProjeOyun.Persistence.Context;
 using System;
@@ -36,9 +37,18 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 		return await _dbSet.ToListAsync();
 	}
 
-	public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> expression)
+	public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? expression = null, Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null)
 	{
-		return await _dbSet.Where(expression).ToListAsync();
+
+		IQueryable<T> query = _dbSet;
+
+		if (expression != null)
+			query = query.Where(expression);
+
+		if (include != null)
+			query = include(query);
+
+		return await query.ToListAsync();
 	}
 
 	public async Task<T> GetAsync(Expression<Func<T, bool>> expression)
@@ -56,4 +66,9 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 		await Task.Run(()=> _context.Update(entity));
 		return entity;
 	}
+	public async Task<int> SaveAsync()
+	{
+		return await _context.SaveChangesAsync();
+	}
+
 }

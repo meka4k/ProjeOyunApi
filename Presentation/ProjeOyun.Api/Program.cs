@@ -1,4 +1,6 @@
 using ProjeOyun.Persistence;
+using ProjeOyun.Infrastructure;
+using ProjeOyun.Application;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddInfrastructure();
+builder.Services.AddApplication();
+
 
 var app = builder.Build();
 

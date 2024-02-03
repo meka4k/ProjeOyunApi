@@ -14,6 +14,7 @@ namespace ProjeOyun.Domain.Entities
         public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
 
-        public ICollection<Sale> Sales { get; set; }
-    }
+
+		public ICollection<Sale> Sales { get; set; }
+	}
 }

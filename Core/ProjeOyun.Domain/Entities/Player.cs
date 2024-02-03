@@ -14,5 +14,8 @@ public class Player
     public string IdentityNo { get; set; }
     public DateTime DateOfBirth { get; set; }
 
+	
 	public ICollection<Sale> Sales { get; set; }
+
+
 }

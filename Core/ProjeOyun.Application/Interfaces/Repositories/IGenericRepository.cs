@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Query;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -10,11 +11,12 @@ namespace ProjeOyun.Application.Interfaces.Repositories
 	public interface IGenericRepository<T> where T : class
 	{
 		Task<List<T>> GetAllAsync();
-		Task<List<T>> GetAllAsync(Expression<Func<T, bool>> expression);
+		Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? expression=null, Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null);
 		Task<T> GetAsync(Expression<Func<T, bool>> expression);
 		Task<T> FindAsync(int id);
 		Task AddAsync(T entity);
 		Task<T> UpdateAsync(T entity);
 		Task HardDelete(T entity);
+		Task<int> SaveAsync();
 	}
 }
